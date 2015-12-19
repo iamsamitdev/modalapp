@@ -1,0 +1,4 @@
+id,book_name,book_auth,book_price,book_status
+1,Java Script,Samit Koyom,299,stock
+2,SQL Sever,อนุชน ไทย,359,in stock
+3,Laravel Basic,สามิตร,890,out of stock

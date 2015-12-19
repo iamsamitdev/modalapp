@@ -11,7 +11,7 @@ $(function(){
 
 	// Event Add Customer Form
 	$('body').on('click','a[rel=addcustomer]',function(){
-		$.get('customerform',function(data){
+		$.get('customerform/'+$('select#cust_group').val(),function(data){
 			$("#custmodal").html(data);
 			// เปิด modal
 			$(".custmodal").modal('show');
@@ -44,50 +44,40 @@ $(function(){
 		var rows;
 		var procode = [];
 		var proname = [];
+		var qty = [];
+		var price = [];
+
 
 		$("input[name='product[]']:checked").each(function ()
 		{
 			procode.push($(this).val());
 			proname.push($(this).attr('data-proname'));
+			qty.push($(this).attr('data-qty'));
+			price.push($(this).attr('data-price'));
 		});
 
-		if(procode.length){
-			var mytable = "<table class='table table-bordered'>"+
-					"<thead>"+
-					"<tr>"+
-					"<th>ID</th>"+
-					"<th>Product Code</th>"+
-					"<th>Product Name</th>"+
-					"<th>Qty</th>"+
-					"<th>Price</th>"+
-					"<th>Action</th>"+
-					"</tr>"+
-					"</thead>"+
-					"<tbody>";
+		//alert(JSON.stringify(proname));
 
+		if(procode.length){
+
+			var rowCount = $('#po_table tr').length; // นับจำนวนแถวของตาราง
+			var mytable;
 			for(rows=1;rows<=procode.length;rows++)
 			{
 				mytable += "<tr>"+
-						"<td>"+rows+"</td>"+
+						"<td>"+((rowCount+rows)-2)+"</td>"+
 						"<td>"+procode[(rows-1)]+"<input type='hidden' name='procode[]' value='"+procode[(rows-1)]+"'></td>"+
 						"<td>"+proname[(rows-1)]+"<input type='hidden' name='proname[]' value='"+proname[(rows-1)]+"'></td>"+
-						"<td><input type=\"text\" name=\"qty[]\" id=\"qty\" class=\"form-control\" value=\"1\"></td>"+
-						"<td><input type=\"text\" name=\"price[]\" id=\"price\" class=\"form-control\" value=\"1200\"></td>"+
+						"<td><input type=\"text\" name=\"qty[]\" id=\"qty\" class=\"form-control\" value='"+qty[(rows-1)]+"'></td>"+
+						"<td><input type=\"text\" name=\"price[]\" id=\"price\" class=\"form-control\" value='"+price[(rows-1)]+"'></td>"+
 						"<td><a href=\"#delete\" rel='pro_delete' class=\"btn btn-sm btn-danger\">Delete</a></td>"+
-					        "</tr>";
+					        "</tr>";        
 			}
 
+			$('#po_table tbody').prepend(mytable);
 
-			mytable += 	"<tr>"+
-					      "<td colspan=\"3\"></td>"+
-					      "<td><span id='total_qty'></span></td>"+
-					      "<td><span id='total_price'></span></td>"+
-					      "<td></td>"+
-					"</tr>"+
-					"</tbody>"+
-					 "</table>";
-
-			$("#product_table").html(mytable);
+			// เรียกใช้ฟังก์ชันนับจำนวนรายการและราคารวม
+			sum_qty_and_price();
 			$(".productmodal").modal('hide');
 
 		}else{
@@ -95,6 +85,12 @@ $(function(){
 		}
 	
 	});
+
+	
+	// Test Prepend
+	// $("body").on("click","a[rel=testprepend]",function(){
+	// 	$('#po_table tbody').prepend('<tr><td>xxx</td><td>xxx</td><td>xxx</td><td>xxx</td><td>xxx</td><td>xxx</td></tr>');
+	// });
 
 
 	// หาผลรวมของจำนวนชิ้น
@@ -194,11 +190,23 @@ $(function(){
 				_token:_token,
 				po_no:po_no,
 				cust_group:cust_group,
+				cust_code:cust_code,
+				cust_name:cust_name,
+				procode:procode,
+				proname:proname,
+				qty:qty,
+				price:price
 			},
 
 			success: function(data)
 			{
-				alert(data);
+				if(data=="Insert_Success")
+				{
+					// แสดง popup ด้วย sweet alert
+					swal("Record Save!", "บันทึกรายการเรียบร้อย!", "success");
+					// ปิด modal
+					$(".pomodal").modal('hide');
+				}
 			},
 
 		},"json");

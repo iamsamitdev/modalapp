@@ -135,6 +135,7 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+		'Clockwork\Support\Laravel\ClockworkServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -192,7 +193,7 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-
+		'Clockwork' => 'Clockwork\Support\Laravel\Facade',
 	],
 
 ];

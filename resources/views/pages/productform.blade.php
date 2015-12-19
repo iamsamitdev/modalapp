@@ -10,12 +10,18 @@
 				<td>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" name="product[]" data-proname="{{$pro->ProductName}}" value="{{$pro->ProductCode}}">
+							<input type="checkbox" name="product[]" 
+							data-proname="{{$pro->ProductName}}" 
+							data-qty="1"
+							data-price="{{$pro->ProductPrice}}"
+							value="{{$pro->ProductCode}}">
 							{{$pro->ProductCode}}
 						</label>
 					</div>
 				</td>
 				<td>{{$pro->ProductName}}</td>
+				<td><input type="text" name="pqty[]" id="pqty" class="form-control" value="1"></td>
+				<td><input type="text" name="pprice[]" id="pprice" class="form-control" value="{{$pro->ProductPrice}}"></td>
 			</tr>
 			@endforeach
 		</tbody>

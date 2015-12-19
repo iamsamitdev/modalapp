@@ -61,12 +61,33 @@
 			</div>
 		</div>
 
+		<!-- <a href="#addtr" rel="testprepend" class="btn btn-primary">Add Rows</a> -->
+
 		<input type="hidden" name="_token" value="{{csrf_token()}}">
 	
 	</form>
 
 	<div id="product_table">
-		
+		<table class='table table-bordered' id='po_table'>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Product Code</th>
+					<th>Product Name</th>
+					<th>Qty</th>
+					<th>Price</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="3"></td>
+					<td><span id='total_qty'></span></td>
+					<td><span id='total_price'></span></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
 </div>

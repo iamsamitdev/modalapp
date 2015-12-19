@@ -1,0 +1,4 @@
+id,book_name,book_auth,book_price,book_status
+1,Java Programming,Samit Koyom,299,instock
+2,Laravel Basic,สามิตร โกยม,399,out of stock
+3,Basic PHP and MySQL,สุนิสา คงศรี,300,instock

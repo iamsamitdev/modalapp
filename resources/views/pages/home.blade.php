@@ -25,6 +25,8 @@
 				<li><a href="#">Order</a></li>
 				<li><a href="#">Customer</a></li>
 				<li><a href="#">Report</a></li>
+				<li><a href="{{url('news-letter')}}">News Letter</a></li>
+				<li><a href="{{url('import-csv')}}">Import CSV</a></li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
